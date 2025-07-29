@@ -93,7 +93,7 @@ function Customer() {
   };
 
   const fetchData = () => {
-    axios.get(apiUrl).then(res => setList(res.data)).catch(err => console.error(err));
+    axios.get(apiUrl).then(res => setList(res.data.data)).catch(err => console.error(err));
   };
 
   useEffect(() => {
