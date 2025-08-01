@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUser, FaSignInAlt, FaTrash, FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -67,7 +67,7 @@ function Header() {
         localStorage.setItem("token", token);
         localStorage.setItem("user", user.fullName);
         localStorage.setItem("role", role.name);
-        localStorage.setItem("employeeId", user.id); 
+        localStorage.setItem("employeeId", user.id);
         localStorage.setItem("email", signupEmail);
 
         setUserName(user.fullName);
@@ -94,7 +94,7 @@ function Header() {
           navigate("/company/companyaccount");
         } else if (role.name === "Super Admin") {
           navigate("/superadmin/users");
-        }else {
+        } else {
           navigate("/");
         }
       } else {
@@ -200,13 +200,13 @@ function Header() {
                   <div className="mb-3 position-relative">
                     <label className="form-label">Password</label>
                     <input type={showPassword ? "text" : "password"} className="form-control pe-5" placeholder="Password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
-                    <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`} style={{position: "absolute", top: "38px", right: "12px", cursor: "pointer", color: "#6c757d" }} onClick={() => setShowPassword(!showPassword)}></i>
+                    <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`} style={{ position: "absolute", top: "38px", right: "12px", cursor: "pointer", color: "#6c757d" }} onClick={() => setShowPassword(!showPassword)}></i>
                   </div>
 
                   <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
                   <div className="d-flex justify-content-center gap-2">
-                    <button className="btn btn-outline-danger btn-sm"><FaGoogle /></button>
-                    <button className="btn btn-outline-primary btn-sm"><FaFacebookF /></button>
+                    <button type="button" className="btn btn-outline-danger btn-sm"><FaGoogle /></button>
+                    <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => { window.location.href = "http://localhost:5269/api/Auth/login-facebook"; }}><FaFacebookF /></button>
                     <button className="btn btn-outline-info btn-sm"><FaTwitter /></button>
                   </div>
                   <p className="text-center mt-3 mb-0">
