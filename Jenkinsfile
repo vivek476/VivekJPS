@@ -9,8 +9,7 @@ pipeline {
         EC2_IP = '34.230.40.32'
         SSH_CRED = 'cf0fd30a-c4e7-4017-a7b5-f7cd712eb3c5'
         APP_DIR = '/home/ubuntu/react-app'
-        REPO = 'git clone https://github.com/vivek476/VivekJPS.git /home/ubuntu/react-app
-'
+        REPO = 'git clone https://github.com/vivek476/VivekJPS.git /home/ubuntu/react-app'
     }
 
     stages {
