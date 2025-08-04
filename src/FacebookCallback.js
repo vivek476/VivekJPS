@@ -19,15 +19,14 @@ const FacebookCallback = () => {
     // Get name, email, role (from backend redirect)
     const name = claims["name"];
     const email = claims["email"];
-    const role = claims["role"] || "Employee"; // fallback
+     // fallback
 
     if (name && email) {
       // Store values in localStorage
       localStorage.setItem("user", name);
       localStorage.setItem("email", email);
       localStorage.setItem("token", "facebook"); // dummy token
-      localStorage.setItem("role", role);
-      localStorage.setItem("employeeId", "fb");
+ 
 
       Swal.fire({
         icon: 'success',
@@ -36,9 +35,7 @@ const FacebookCallback = () => {
         timer: 2000,
         showConfirmButton: false
       });
-
-      // ✅ Navigate to employee dashboard or profile
-      navigate("/employee/dashboard"); 
+      navigate("/logingf");
     } else {
       Swal.fire({
         icon: 'error',

@@ -24,6 +24,8 @@ import Userroles from './Superadmin/Userroles';
 import Customer from './Superadmin/Customer';
 import { useEffect, useState } from 'react';
 import FacebookCallback from './FacebookCallback';
+import GoogleCallback from './GoogleCallback';
+import Logingf from './Logingf';
 
 function Sidebar() {
   const location = useLocation();
@@ -203,6 +205,8 @@ function Sidebar() {
 }
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
   return (
     <BrowserRouter>
       <div className="d-flex flex-column min-vh-100"> {/* Full height layout */}
@@ -236,6 +240,9 @@ function App() {
               <Route path="/superadmin/userroles" element={<Userroles />} />
               <Route path="/superadmin/customer" element={<Customer />} />
               <Route path="/facebookcallback" element={<FacebookCallback />} />
+              <Route path="/google-callback" element={<GoogleCallback setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />} />
+              <Route path="/logingf" element={<Logingf />} />
+
             </Routes>
           </div>
         </div>
