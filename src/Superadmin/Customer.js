@@ -351,12 +351,11 @@ function Customer() {
                         <p><strong>Qualification:</strong> {selectedCustomer?.qualification}</p>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="row mb-3">
+                    
                     <div className="col-md-6">
                       <p><strong>Languages:</strong> { selectedCustomer?.languages?.split(',').map((lang, i) => ( <span key={i} className="badge bg-primary me-1">{lang}</span> )) }</p>
                     </div>
+                  
                   </div>
 
                 </div>
