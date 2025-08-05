@@ -116,7 +116,7 @@ function Customer() {
   const handleDownload = () => {
     const csvContent =
       "Id,Name,Address,Mobile,Email,Password\n" +
-      list.map(c => `${c.id},${c.name},${c.address},${c.mobile},${c.email},${c.password}`).join("\n");
+      list.map(c => `${c.id},${c.name},${c.address},${c.mobile},${c.email},${c.password},${c.gender},${c.qualification},${c.languages},${c.imagePath}`).join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv" });
     const link = document.createElement("a");
