@@ -44,6 +44,7 @@ function Customer() {
     setPassword("");
     setGender("");
     setQualification([]);
+    setLanguages([]);
     setImage(null);
   };
 

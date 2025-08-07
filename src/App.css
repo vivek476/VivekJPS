@@ -195,5 +195,16 @@ footer {
   text-align: center;
 }
 
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block !important;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
 
 

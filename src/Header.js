@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FaUser, FaSignInAlt, FaTrash, FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import "./App.css";
 
 function Header() {
   const [showLogin, setShowLogin] = useState(false);
@@ -149,13 +150,36 @@ function Header() {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'linear-gradient(90deg, #343a40, #212529)' }}>
         <div className="container-fluid">
-          <Link className="navbar-brand fw-bold" to="/">VivS Infotech</Link>
+          <Link className="navbar-brand fw-bold" style={{ marginLeft: '30px' }} to="/">VivS Infotech</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item"><Link className="nav-link" to="/home">Home</Link></li>
+
+
+              <li className="nav-item dropdown" style={{ marginLeft: '60px', position: 'relative' }}
+                onMouseEnter={(e) => e.currentTarget.classList.add('show')}
+                onMouseLeave={(e) => e.currentTarget.classList.remove('show')}
+              >
+                <Link to="/home" className="nav-link" role="button">Jobs</Link>
+                <div className="dropdown-menu show-on-hover" style={{ display: 'none', position: 'absolute' }}>
+                  <div className="d-flex p-3" style={{ minWidth: '100px' }}>
+                    <div className="me-5">
+                      <h6 className="dropdown-header text-gray">Popular Categories</h6>
+                      <Link className="dropdown-item" to="/jobs/it">IT Jobs</Link>
+                      <Link className="dropdown-item" to="/jobs/sales">Sales Jobs</Link>
+                      <Link className="dropdown-item" to="/jobs/marketing">Marketing Jobs</Link>
+                      <Link className="dropdown-item" to="/jobs/data-science">Data Science Jobs</Link>
+                      <Link className="dropdown-item" to="/jobs/hr">HR Jobs</Link>
+                      <Link className="dropdown-item" to="/jobs/engineering">Engineering Jobs</Link>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+
+
               <li className="nav-item"><Link className="nav-link" to="/feedback">FeedBack</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/contactus">Contact Us</Link></li>
             </ul>
@@ -180,44 +204,46 @@ function Header() {
             </div>
           </div>
         </div>
-      </nav>
+      </nav >
 
       {/* Login Modal */}
-      {showLogin && (
-        <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }} onClick={() => setShowLogin(false)}>
-          <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "400px" }} onClick={(e) => e.stopPropagation()}>
-            <div className="modal-content shadow rounded-3">
-              <div className="modal-header bg-primary text-white">
-                <h5 className="modal-title">Login</h5>
-                <button type="button" className="btn-close" onClick={() => setShowLogin(false)}></button>
-              </div>
-              <div className="modal-body">
-                <form onSubmit={handleLogin}>
-                  <div className="mb-3">
-                    <label className="form-label">Email</label>
-                    <input type="email" className="form-control" placeholder="User Id" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
-                  </div>
-                  <div className="mb-3 position-relative">
-                    <label className="form-label">Password</label>
-                    <input type={showPassword ? "text" : "password"} className="form-control pe-5" placeholder="Password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
-                    <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`} style={{ position: "absolute", top: "38px", right: "12px", cursor: "pointer", color: "#6c757d" }} onClick={() => setShowPassword(!showPassword)}></i>
-                  </div>
+      {
+        showLogin && (
+          <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }} onClick={() => setShowLogin(false)}>
+            <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "400px" }} onClick={(e) => e.stopPropagation()}>
+              <div className="modal-content shadow rounded-3">
+                <div className="modal-header bg-primary text-white">
+                  <h5 className="modal-title">Login</h5>
+                  <button type="button" className="btn-close" onClick={() => setShowLogin(false)}></button>
+                </div>
+                <div className="modal-body">
+                  <form onSubmit={handleLogin}>
+                    <div className="mb-3">
+                      <label className="form-label">Email</label>
+                      <input type="email" className="form-control" placeholder="User Id" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
+                    </div>
+                    <div className="mb-3 position-relative">
+                      <label className="form-label">Password</label>
+                      <input type={showPassword ? "text" : "password"} className="form-control pe-5" placeholder="Password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
+                      <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`} style={{ position: "absolute", top: "38px", right: "12px", cursor: "pointer", color: "#6c757d" }} onClick={() => setShowPassword(!showPassword)}></i>
+                    </div>
 
-                  <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
-                  <div className="d-flex justify-content-center gap-2">
-                    <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => { window.location.href = "http://localhost:5269/api/GAuth/login-google";}}><FaGoogle /></button>
-                    <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => { window.location.href = "http://localhost:5269/api/Auth/login-facebook"; }}><FaFacebookF /></button>
-                    <button className="btn btn-outline-info btn-sm"><FaTwitter /></button>
-                  </div>
-                  <p className="text-center mt-3 mb-0">
-                    No account? <button className="btn btn-link p-0" onClick={() => { setShowLogin(false); setShowSignup(true); }}>Sign Up</button>
-                  </p>
-                </form>
+                    <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
+                    <div className="d-flex justify-content-center gap-2">
+                      <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => { window.location.href = "http://localhost:5269/api/GAuth/login-google"; }}><FaGoogle /></button>
+                      <button type="button" className="btn btn-outline-primary btn-sm" onClick={() => { window.location.href = "http://localhost:5269/api/Auth/login-facebook"; }}><FaFacebookF /></button>
+                      <button className="btn btn-outline-info btn-sm"><FaTwitter /></button>
+                    </div>
+                    <p className="text-center mt-3 mb-0">
+                      No account? <button className="btn btn-link p-0" onClick={() => { setShowLogin(false); setShowSignup(true); }}>Sign Up</button>
+                    </p>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Signup Modal */}
       {/* {showSignup && (
